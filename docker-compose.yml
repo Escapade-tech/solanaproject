@@ -1,0 +1,19 @@
+version: '3'
+
+volumes:
+ solana-nuxt-app-sync:
+   external: true
+
+services:
+ frontend:
+   # Dockerfileの場所
+   build: ./frontend
+   # ホストOSとコンテナ内でソースコードを共有
+   volumes:
+     - ./frontend:/usr/src/app
+   environment:
+     - HOST=0.0.0.0
+   # コンテナ内部の3000を外部から8080でアクセス
+   ports:
+     - "8080:3000"
+   tty: true
